@@ -8,12 +8,12 @@ mongoose.set('strictQuery', true);
 mongoose
   .connect(DB)
   .then(() => {
-    console.log('DBATLAS Up and Running');
+    console.log('Connected to MongoDB-ATLAS');
     // console.log(con.connections);
   })
   .catch((err) => console.log(err));
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 
 app.listen(port, () => {
   console.log(`Server up and running on port ${port}`);
