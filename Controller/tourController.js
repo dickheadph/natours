@@ -3,6 +3,41 @@
 const Tour = require('../Model/tourModel');
 const ApiFeatures = require('../Utility/apiFeatures');
 
+exports.easyTours = async (req, res, next) => {
+  try {
+    const easyTours = await Tour.find({ difficulty: 'easy' });
+    res.status(200).json({
+      status: 'Succesful',
+      length: easyTours.length,
+      data: {
+        easyTours,
+      },
+    });
+    next();
+  } catch (error) {
+    res.status(400).json({
+      status: 'Failed',
+      message: 'Path Not Found',
+      error,
+    });
+  }
+};
+exports.mediumTours = async (req, res, next) => {
+  await Tour.find({ difficulty: 'medium' });
+  next();
+};
+exports.difficultTours = async (req, res, next) => {
+  await Tour.find({ difficulty: 'difficult' });
+  next();
+};
+
+exports.top5Cheap = (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-ratingsAverage,price';
+  req.query.feilds = 'name,ratingsAverage,summary,difficulty,price';
+  next();
+};
+
 exports.getAllTour = async (req, res) => {
   try {
     //console.log(req.query);
