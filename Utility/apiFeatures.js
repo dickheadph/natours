@@ -45,7 +45,7 @@ class ApiFeatures {
   //PAGINATE
   paginate() {
     const pageNum = +this.queryString.page || 1;
-    const limitPerPage = +this.queryString.limit || 5;
+    const limitPerPage = +this.queryString.limit;
     const skipPage = (pageNum - 1) * limitPerPage;
     console.log(skipPage);
 
